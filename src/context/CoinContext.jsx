@@ -1,4 +1,4 @@
-import { createContext,useState,useEffect } from 'react'
+﻿import { createContext,useState,useEffect } from 'react'
 
 export const CoinContext = createContext()
 
@@ -19,13 +19,24 @@ const CoinContextProvider = (props) => {
         };  
                 
         try {
-            const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name.toLowerCase()}`, options).then(response => response.json()).then(response => setAllCoin(response)).catch(err => console.error(err));
+            const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name.toLowerCase()}`, options);
+            if (!response.ok) {
+                console.error('Fetch failed:', response.status, response.statusText);
+                setAllCoin([]);
+                return;
+            }
             const data = await response.json();
             setAllCoin(data);
         } catch (error) {
             console.error('Error fetching coin data:', error);
+            setAllCoin([]);
         }
     }
+
+    useEffect(() => {
+        fetchAllCoin();
+    }   
+    , [currency])
   return (
     <CoinContext.Provider value={{ allCoin, currency, fetchAllCoin }}>  
         {props.children}
