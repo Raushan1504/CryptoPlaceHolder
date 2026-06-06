@@ -3,9 +3,9 @@
 export const CoinContext = createContext()
 
 const CoinContextProvider = (props) => {
-    const [allCoin, setAllCoin] = useState([]);  
+    const [allCoin, setAllCoin] = useState([]);
     const [currency,setCurrency] = useState({
-        name: 'USD',
+        name: 'usd',
         symbol: '$'
 
     });
@@ -38,10 +38,10 @@ const CoinContextProvider = (props) => {
     }   
     , [currency])
   return (
-    <CoinContext.Provider value={{ allCoin, currency, fetchAllCoin }}>  
+    <CoinContext.Provider value={{ allCoin, currency, fetchAllCoin, setCurrency }}>
         {props.children}
-    </CoinContext.Provider> 
-    )    
+    </CoinContext.Provider>
+  )
 
 }
 export default CoinContextProvider
