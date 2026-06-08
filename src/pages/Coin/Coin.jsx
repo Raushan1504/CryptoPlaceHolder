@@ -41,13 +41,19 @@ const Coin = () => {
     }
   };
 
-  fetch(
-    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10`,
-    options
-  )
-    .then(response => response.json())
-    .then(response => setHistoryData(response))
-    .catch(err => console.error(err));
+  try {
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=100&interval=daily`, options);
+    if (!response.ok) {
+      console.error('Failed to fetch historical data:', response.status, response.statusText);
+      setHistoryData(null);
+      return;
+    }
+    const data = await response.json();
+    setHistoryData(data);
+  } catch (err) {
+    console.error('Error fetching historical data:', err);
+    setHistoryData(null);
+  }
 };
 
   useEffect(() => {
@@ -65,9 +71,29 @@ if(coinData && historyData){
       </div>
       <div className="coin-charts">
           <LineChart historyData={historyData} />
-    
       </div>
-
+      <div className="coin-info">
+        <ul>  
+        <li><b>Crypto Market Rank:</b></li>
+        <li> {coinData?.market_cap_rank}</li>
+       </ul>
+       <ul>
+        <li><b>Current Price:</b></li>
+        <li> {currency.symbol} {coinData?.market_data?.current_price[currency.name].toLocaleString()}</li>
+       </ul>
+       <ul>
+        <li><b>Market Cap:</b></li>
+        <li> {currency.symbol} {coinData?.market_data?.market_cap[currency.name].toLocaleString()}</li>
+       </ul>
+       <ul>
+        <li><b>24 Hour High:</b></li>
+        <li> {currency.symbol} {coinData?.market_data?.high_24h[currency.name].toLocaleString()}</li>
+       </ul>
+       <ul>
+        <li><b>24 Hour Low:</b></li>
+        <li> {currency.symbol} {coinData?.market_data?.low_24h[currency.name].toLocaleString()}</li>
+       </ul>
+      </div>
     </div>
     
   
