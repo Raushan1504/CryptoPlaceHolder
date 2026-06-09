@@ -20,7 +20,8 @@ To make your repository look professional, we recommend adding a `screenshots` f
 
 ### 2. Coin Detail Page & Historical Price Chart
 *Capture the details page showing a selected coin (e.g., Bitcoin), its rank, market cap, 24h highs/lows, and the interactive Google Line Chart showing the 100-day price trend.*
-![CryptoPlace Coin Details](./assets/screenshots/coin_details.png)
+![CryptoPlace Coin Details1](./assets/screenshots/coin_details1.png)
+![CryptoPlace Coin Details2](./assets/screenshots/coin_details2.png)
 
 ### 3. Currency Selection Dropdown
 *Capture the dropdown currency switcher in the header (USD, EUR, GBP, INR) showing how prices dynamically update across the entire app.*
