@@ -5,7 +5,7 @@ A modern, fast, and responsive cryptocurrency tracking application built with **
 ---
 
 ## 🚀 Live Demo / Preview
-https://crypto-place-holder.vercel.app/
+👉 [**View Live**](https://crypto-place-holder.vercel.app/)
 
 ---
 
